@@ -4,6 +4,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
+const { handleGetTweets } = require("./handlers");
+
 const PORT = 4000;
 
 express()
@@ -26,7 +28,9 @@ express()
       parameterLimit: 50000,
     })
   )
-  .use("/", express.static(__dirname + "/"))
+  //   .use("/", express.static(__dirname + "/"))
+
+  .get("/tweets/:user", handleGetTweets)
 
   .use((req, res) => res.send("Not Found"))
   .listen(PORT, () => console.log(`Listening on port ${PORT}`));

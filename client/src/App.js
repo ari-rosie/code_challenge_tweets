@@ -2,25 +2,19 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import GlobalStyles from "./GlobalStyles";
+import Header from "./Header";
+import TweetContent from "./TweetContent";
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      App
-      {/* <Router>
-        <Switch>
-          <Route exact path="/">
-            <Homepage />
-          </Route>
-          <Route path="/new-account">
-            <SignUpPage />
-          </Route>
-          <Route path="/account">
-            <Account />
-          </Route>
-        </Switch>
-      </Router> */}
+      <Router>
+        <Route exact path="/">
+          <Header />
+          <TweetContent />
+        </Route>
+      </Router>
     </>
   );
 }
