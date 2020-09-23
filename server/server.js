@@ -30,7 +30,7 @@ express()
   )
   //   .use("/", express.static(__dirname + "/"))
 
-  .get("/tweets/:user", handleGetTweets)
+  .get("/tweets/:id", handleGetTweets)
 
   .use((req, res) => res.send("Not Found"))
   .listen(PORT, () => console.log(`Listening on port ${PORT}`));
