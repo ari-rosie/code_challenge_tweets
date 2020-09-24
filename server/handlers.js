@@ -13,7 +13,7 @@ const handleGetTweets = async (req, res) => {
 
   await T.get(
     "statuses/user_timeline",
-    { screen_name: user, count: 5 },
+    { screen_name: user, count: 10 },
     function (err, data, response) {
       res.status(200).json({ status: 200, data: data });
     }

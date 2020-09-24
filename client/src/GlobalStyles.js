@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { COLORS } from "./constants";
 
 const GlobalStyles = createGlobalStyle`
 
@@ -51,6 +52,11 @@ table {
 	border-spacing: 0;
 }
 /* ------------ END OF CSS RESET ------------ */
+
+body {
+	font-family: 'Roboto', sans-serif;
+	color: ${COLORS.black};
+}
 
 `;
 
