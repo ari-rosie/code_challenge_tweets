@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -6,14 +6,18 @@ import Tweet from "./Tweet";
 
 const TweetContent = () => {
   const { user, content } = useSelector((state) => state.userReducer);
+  useEffect(() => {
+    console.log(content);
+  }, [content]);
 
   return (
     <Wrapper>
-      {user ? (
+      {content ? (
         <>
           <div>
             {content.map((tweet) => {
-              return <Tweet key={tweet.id} data={tweet} />;
+              if (tweet.in_reply_to_screen_name === user)
+                return <Tweet key={tweet.id} data={tweet} />;
             })}
           </div>
         </>

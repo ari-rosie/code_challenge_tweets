@@ -1,21 +1,32 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { setUser } from "../actions";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addStreamTweet, setUser } from "../actions";
 import styled from "styled-components";
+import socketIOClient from "socket.io-client";
 
 import UnstyledButton from "../UnstyledButton";
 import { COLORS } from "../constants";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const { user, content } = useSelector((state) => state.userReducer);
 
-  const handleClick = async (user) => {
-    try {
-      const result = await fetch(`/tweets/${user}`);
-      const content = await result.json();
-      dispatch(setUser(user, content.data));
-    } catch (error) {
-      console.log(error);
+  const handleClick = async (screenName) => {
+    dispatch(setUser(screenName, []));
+    if (!user) {
+      const socket = socketIOClient("http://localhost:3000");
+
+      socket.on("connect", () => {
+        console.log("socket connect");
+        socket.on("tweets", (data) => {
+          dispatch(addStreamTweet(data));
+        });
+      });
+      socket.on("disconnect", () => {
+        socket.off();
+        socket.removeAllListeners("Tweets");
+        console.log("socket disconnect");
+      });
     }
   };
 
