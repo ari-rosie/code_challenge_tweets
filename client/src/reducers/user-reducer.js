@@ -5,13 +5,14 @@ const initialState = {
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
-    case "SET-USER-ASYNC":
+    case "SET-USER":
+      console.log(action.user);
       return {
         ...state,
         user: action.user,
-        content: action.data,
       };
     case "ADD-STREAM-TWEET":
+      console.log(state.content);
       let newContent = [...state.content];
       newContent.push(action.tweet);
       if (newContent.length > 5) newContent = newContent.slice(1);
@@ -20,6 +21,8 @@ export default function userReducer(state = initialState, action) {
         ...state,
         content: newContent,
       };
+    case "CLEAR-CONTENT-ASYNC":
+      return initialState;
     default:
       return state;
   }

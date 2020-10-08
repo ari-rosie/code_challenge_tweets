@@ -1,20 +1,23 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addStreamTweet, setUser } from "../actions";
+import { addStreamTweet, clearContent, setUser } from "../actions";
 import styled from "styled-components";
 import socketIOClient from "socket.io-client";
 
 import UnstyledButton from "../UnstyledButton";
 import { COLORS } from "../constants";
 
+let socket = null;
+
 const Header = () => {
   const dispatch = useDispatch();
   const { user, content } = useSelector((state) => state.userReducer);
 
-  const handleClick = async (screenName) => {
-    dispatch(setUser(screenName, []));
-    if (!user) {
-      const socket = socketIOClient("http://localhost:3000");
+  const handleClick = (screenName) => {
+    dispatch(setUser(screenName));
+
+    if (!socket) {
+      socket = socketIOClient("http://localhost:3000");
 
       socket.on("connect", () => {
         console.log("socket connect");

@@ -1,9 +1,9 @@
 import { takeLatest, put } from "redux-saga/effects";
 
-function* setUserAsync() {
-  yield put({ type: "SET-USER-ASYNC", value: 1 });
+function* clearContentAsync() {
+  yield put({ type: "CLEAR-CONTENT-ASYNC", value: 1 });
 }
 
-export function* watchSetUser() {
-  yield takeLatest("SET-USER", setUserAsync);
+export function* watchClearContent() {
+  yield takeLatest("CLEAR-CONTENT", clearContentAsync);
 }

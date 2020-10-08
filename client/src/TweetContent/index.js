@@ -12,7 +12,7 @@ const TweetContent = () => {
 
   return (
     <Wrapper>
-      {content ? (
+      {content && content.length > 0 ? (
         <>
           <div>
             {content.map((tweet) => {

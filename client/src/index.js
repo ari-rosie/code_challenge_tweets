@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { watchSetUser } from "./sagas/saga";
+import { watchClearContent } from "./sagas/saga";
 
 import { Provider } from "react-redux";
 
@@ -12,7 +12,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore(sagaMiddleware);
 
-sagaMiddleware.run(watchSetUser);
+sagaMiddleware.run(watchClearContent);
 
 ReactDOM.render(
   <Provider store={store}>

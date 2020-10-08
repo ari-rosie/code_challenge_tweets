@@ -45,7 +45,7 @@ let followUserID;
 let socketConnection;
 let twitterStream;
 
-// const handleGetTweets = () => {
+const handleGetTweets = () => {
   client.stream(
     "statuses/filter",
     {
@@ -65,16 +65,16 @@ let twitterStream;
   );
 };
 
-app.get("/tweets/:id", (req, res) => {
-  const user = req.params.id;
-  client.get(
-    "statuses/user_timeline",
-    { screen_name: user, count: 4 },
-    function (err, tweets, response) {
-      res.status(200).json({ data: tweets });
-    }
-  );
-});
+// app.get("/tweets/:id", (req, res) => {
+//   const user = req.params.id;
+//   client.get(
+//     "statuses/user_timeline",
+//     { screen_name: user, count: 4 },
+//     function (err, tweets, response) {
+//       res.status(200).json({ data: tweets });
+//     }
+//   );
+// });
 
 io.on("connection", (socket) => {
   socketConnection = socket;
